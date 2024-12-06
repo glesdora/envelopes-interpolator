@@ -1,0 +1,15 @@
+# VS Code settings
+.vscode/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Executables and build directories
+*.exe
+*.out
+*.app
+*.bin
+build/
+debug/
+release/
