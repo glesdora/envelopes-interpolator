@@ -8,5 +8,5 @@ The library is versatile and can be used in audio processing, data visualization
 ### **Installation**
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/EnvelopesInterpolator.git
+   git clone https://github.com/glesdora/envelopes-interpolator.git
    cd EnvelopesInterpolator
