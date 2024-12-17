@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include "DoubleBuffer.h"
 #include "EnvelopesInterpolator.h"
 
 void printenvelope(const std::vector<float>& envelope, int size)
@@ -23,9 +24,8 @@ void printenvelope(const std::vector<float>& envelope, int size)
 int main()
 {
     const int size = 100;
-
-    // Initialize EnvelopesInterpolator with a buffer size
     EnvelopesInterpolator et(size);
+    DoubleBuffer db(size);
 
     // Define shapes
     std::vector<std::pair<int, float>> s1 = { {0, 0.0f}, {3, 1.0f}, {size-6, 0.0f}, {size-3, 0.5f}, {size-1, 0.0f} };
@@ -33,21 +33,24 @@ int main()
     std::vector<std::pair<int, float>> s3 = { {0, 0.0f}, {size-1, 1.0f} };
     std::vector<std::pair<int, float>> s4 = { {0, 1.0f}, {size-1, 0.0f} };
 
-    // Add shapes to the interpolator
     et.addLinearShape(s1, 10);
     et.addLinearShape(s2, 0);
     et.addLinearShape(s3, size-1);
     et.addLinearShape(s4, 0);
 
     // Test cases
-    std::vector<float> targetBuffer(size);
     std::vector<float> testInputs = {0.0f, 1.5f, 2.2f, 3.7f};
 
     std::cout << "Testing EnvelopesInterpolator:\n";
     for (float inter : testInputs) {
         std::cout << "\nInterpolation Factor: " << inter << "\n";
-        et.interpolate(inter, targetBuffer);
-        printenvelope(targetBuffer, size);
+        
+        auto& writingBuffer = db.getInactiveBuffer();
+        et.interpolate(inter, writingBuffer);
+        
+        printenvelope(writingBuffer, size);
+
+        db.swapBuffers();
     }
 
     return 0;
