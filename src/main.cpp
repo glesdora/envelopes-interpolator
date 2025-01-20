@@ -29,17 +29,17 @@ int main()
 
     // Define shapes
     std::vector<std::pair<int, float>> s1 = { {0, 0.0f}, {3, 1.0f}, {size-6, 0.0f}, {size-3, 0.5f}, {size-1, 0.0f} };
-    std::vector<std::pair<int, float>> s2 = { {0, 1.0f}, {size-1, 0.0f} };
-    std::vector<std::pair<int, float>> s3 = { {0, 0.0f}, {size-1, 1.0f} };
-    std::vector<std::pair<int, float>> s4 = { {0, 1.0f}, {size-1, 0.0f} };
+    std::vector<std::pair<int, float>> s2 = { {0, 0.0f}, {1, 1.0f}, {size-1, 0.0f} };
+    std::vector<std::pair<int, float>> s3 = { {0, 0.0f}, {size-2, 1.0f}, {size-1, 0.0f} };
+    std::vector<std::pair<int, float>> s4 = { {0, 0.0f}, {15, 1.0f}, {40, 0.6f}, {80, 0.6f}, {size-1, 0.0f} };
 
-    et.addLinearShape(s1, 10);
-    et.addLinearShape(s2, 0);
-    et.addLinearShape(s3, size-1);
-    et.addLinearShape(s4, 0);
+    et.addLinearShape(s1, 3);
+    et.addLinearShape(s2, 1);
+    et.addLinearShape(s3, size-2);
+    et.addLinearShape(s4, 15);
 
     // Test cases
-    std::vector<float> testInputs = {0.0f, 1.5f, 2.2f, 3.7f};
+    std::vector<float> testInputs = {0.0f, 1.5f, 2.2f, 3.3f};
 
     std::cout << "Testing EnvelopesInterpolator:\n";
     for (float inter : testInputs) {

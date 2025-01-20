@@ -1,7 +1,8 @@
+#pragma once
+
 #include <vector>
 #include <algorithm>
-
-#include <iostream>
+#include <cmath>
 
 /*
     This class performs interpolation between a set of shapes, each defined by a set of points.
@@ -13,6 +14,8 @@
 
     The interpolation is "circle-shaped," meaning any shape can be interpolated with the next and 
     previous shapes in the sequence, with the last shape connecting seamlessly to the first.
+    Because the primary purpose of this class is for audio envelopes, it is assumed that
+    the first and last points of each shape are zero.
 */
 
 struct EnvelopeTable {
@@ -52,7 +55,8 @@ private:
      * 
      * @param inputCurve The original curve to stretch or shrink.
      * @param stretchedCurve Output vector to store the adjusted curve.
-     * @param newLength The desired length of the output curve.
+     * @param newLength The virtual length of the stretched curve.
+	 * @param excludePeak If true, the last point of the curve is excluded from the output.
      */
-    void stretchCurve(const std::vector<float>& inputCurve, std::vector<float>& stretchedCurve, int newLength);
+	void stretchCurve(const std::vector<float>& inputCurve, std::vector<float>& stretchedCurve, float newLength, bool excludePeak = false);
 };
