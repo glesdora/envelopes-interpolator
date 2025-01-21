@@ -179,6 +179,17 @@ void EnvelopesInterpolator::setEnvelopeTable(EnvelopeTable e)
     }
 }
 
+//add a new shape at the end of the table
+void EnvelopesInterpolator::addNewShape(const std::vector<float>& shape, int peakPosition)
+{
+	if (shape.size() != _envsize) return;
+	if (shape[0] != 0 || shape[_envsize - 1] != 0) return;
+
+	_shapes.push_back(shape);
+	_numberOfShapes++;
+	_peaks.push_back(peakPosition);
+}
+
 //add a new shape, drawn via linear interpolation between given points, at the end of the table
 void EnvelopesInterpolator::addLinearShape(const std::vector<std::pair<int, float>>& points, int peakPosition)
 {

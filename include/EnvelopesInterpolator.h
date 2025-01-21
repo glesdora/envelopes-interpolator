@@ -42,6 +42,7 @@ public:
 
     void setDataAndPeaks(const float* data, const std::vector<int>& peaks);
     void setEnvelopeTable(EnvelopeTable e);
+    void addNewShape(const std::vector<float>& shape, int peakPosition);
     void addLinearShape(const std::vector<std::pair<int, float>>& points, int peakPosition);
 
 private:
